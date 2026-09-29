@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+@theme {
+  /* Industrial-luxury palette */
+  --color-charcoal: #202124;
+  --color-graphite: #303238;
+  --color-cedar: #9a6844;
+  --color-cedar-dark: #7d5436;
+  --color-sand: #d7c1a4;
+  --color-offwhite: #f5f2ec;
+  --color-glass: rgba(255, 255, 255, 0.08);
+  --color-hairline: rgba(32, 33, 36, 0.15);
+
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(32, 33, 36, 0.04), 0 8px 24px rgba(32, 33, 36, 0.08);
+  --shadow-soft: 0 18px 50px -20px rgba(32, 33, 36, 0.35);
+
+  --radius-card: 14px;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-offwhite);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  /* Visible focus for accessibility */
+  :focus-visible {
+    outline: 3px solid var(--color-cedar);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-cedar);
+    color: #fff;
+  }
+}
+
+@layer components {
+  .container-edge {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+    padding-inline: clamp(1.1rem, 4vw, 3rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+    font-weight: 700;
+    font-size: 0.72rem;
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px) saturate(120%);
+    -webkit-backdrop-filter: blur(14px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .glass-dark {
+    background: rgba(32, 33, 36, 0.55);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  /* Neumorphic microinteraction surface */
+  .neumorph {
+    background: var(--color-offwhite);
+    box-shadow: 6px 6px 14px rgba(32, 33, 36, 0.08),
+      -6px -6px 14px rgba(255, 255, 255, 0.9);
+  }
+
+  .btn-cedar {
+    background: var(--color-cedar);
+    color: #fff;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn-cedar:hover {
+    background: var(--color-cedar-dark);
+    box-shadow: 0 14px 30px -12px rgba(154, 104, 68, 0.7);
+  }
+
+  .btn-charcoal {
+    background: var(--color-charcoal);
+    color: #fff;
+    font-weight: 700;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .btn-charcoal:hover {
+    background: var(--color-graphite);
+  }
+
+  .btn-outline {
+    border: 1.5px solid var(--color-charcoal);
+    color: var(--color-charcoal);
+    font-weight: 700;
+    background: transparent;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: var(--color-charcoal);
+    color: #fff;
+  }
+}
+
+/* GSAP reveal initial state */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal-init {
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Hide scrollbar inside mobile menu while allowing scroll */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
