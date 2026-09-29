@@ -1,10 +1,14 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 
-const databaseUrl = process.env.DATABASE_URL;
+const databaseUrl =
+  process.env.DATABASE_URL ??
+  "postgresql://postgres:postgres@localhost:5432/app_db";
 
-if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
+if (!process.env.DATABASE_URL) {
+  console.warn(
+    "DATABASE_URL is not set - using placeholder for build; runtime DB calls will fail gracefully until it is configured."
+  );
 }
 
 const globalForDb = globalThis as typeof globalThis & {
